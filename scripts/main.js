@@ -12,45 +12,57 @@ const Gameboard = {
     ]
 
 }
-Gameboard.table = Array.from(Array(9).keys());
-// console.log(Gameboard.table)
-
-
 const Player = (name, marker) => {
 
     // 123, 456, 789, 147, 258, 369 159, 357
     //nine divs, onclick check if its empty, put the player marker and then check for a win,
     // if all nine divs arent empty, then a draw
 
-    return { name, marker }
 
-}
+    checkWin = function() {
+            let xs = [];
+            for (let i = 0; i < Gameboard.table.length; i++) {
+                if (Gameboard.table[i] == this.marker) {
+                    xs.push(i)
+                }
+            }
+            xs = xs.join("");
+            // console.log(xs)
 
-function checkWin(){
-    let xs = [];
-    for(let i = 0; i < Gameboard.table.length; i++){
-        if(Gameboard.table[i] == "X"){
-            xs.push(i)
-          }
-    }
-    xs = xs.join("");
-    console.log(xs)
+            Gameboard.winComs.forEach(word => {
 
-    Gameboard.winComs.forEach(word => {
+                if (xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])) {
+                    console.log(`${this.name} wins`);
+                }
+            })
 
-        if(xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])){
-            return true;
+        },
+
+        playerMove = function(index, playerMark) {
+            Gameboard.table.splice(index, 1, playerMark);
+        },
+
+        draw = function() {
+
         }
-    })
-
+    return { name, marker, checkWin }
+    // return {
+    //     // name,
+    //     // marker,
+    //     checkWin()
+    // }
 }
+Gameboard.table = Array.from(Array(9).keys());
+// console.log(Gameboard.table)
 
 
 
 
-function playerMove(index, playerMark) {
-    Gameboard.table.splice(index, 1, playerMark);
-}
+
+
+
+
+
 
 // create the render function
 
@@ -60,7 +72,11 @@ function render() {
     for (let i = 0; i < Gameboard.table.length; i++) {
         let newDiv = document.createElement("div");
         gameBoard.appendChild(newDiv);
-        newDiv.textContent = Gameboard.table[i];
+        if (typeof Gameboard.table[i] == "number") {
+            newDiv.textContent = " ";
+        } else {
+            newDiv.textContent = Gameboard.table[i];
+        }
     }
 }
 
@@ -69,11 +85,11 @@ const mike = Player("mike", "O");
 const roodz = Player("roodz", "X")
 
 playerMove(0, roodz.marker);
-playerMove(4, roodz.marker);
-playerMove(8, roodz.marker);
-playerMove(2, roodz.marker);
-
-checkWin();
+playerMove(0, mike.marker);
+playerMove(4, mike.marker);
+playerMove(8, mike.marker);
+// console.log(mike);
+// mike.checkWin();
 render();
 // // console.log(mike.mark)
 
