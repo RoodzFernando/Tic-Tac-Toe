@@ -1,14 +1,14 @@
 const Gameboard = {
     table: [],
     winComs: [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8]
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
+        "012",
+        "345",
+        "678",
+        "036",
+        "147",
+        "258",
+        "048",
+        "246",
     ]
 
 }
@@ -25,6 +25,28 @@ const Player = (name, marker) => {
     return { name, marker }
 
 }
+
+function checkWin(){
+    let xs = [];
+    for(let i = 0; i < Gameboard.table.length; i++){
+        if(Gameboard.table[i] == "X"){
+            xs.push(i)
+          }
+    }
+    xs = xs.join("");
+    console.log(xs)
+
+    Gameboard.winComs.forEach(word => {
+
+        if(xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])){
+            return true;
+        }
+    })
+
+}
+
+
+
 
 function playerMove(index, playerMark) {
     Gameboard.table.splice(index, 1, playerMark);
@@ -44,10 +66,14 @@ function render() {
 
 // console.log(Gameboard.table.length);
 const mike = Player("mike", "O");
-const roodz = Player("roodz", "x")
+const roodz = Player("roodz", "X")
 
-playerMove(0, mike.marker);
+playerMove(0, roodz.marker);
+playerMove(4, roodz.marker);
 playerMove(8, roodz.marker);
+playerMove(2, roodz.marker);
+
+checkWin();
 render();
 // // console.log(mike.mark)
 
