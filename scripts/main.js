@@ -43,7 +43,9 @@ const Player = (name, marker) => {
         },
 
         draw = function() {
-
+            if (Gameboard.table.every(elem => typeof elem == "string")) {
+                console.log('It\' a draw!');
+            }
         }
     return { name, marker, checkWin }
     // return {
@@ -96,7 +98,7 @@ playerMove(2, roodz.marker);
 playerMove(3, roodz.marker);
 playerMove(7, roodz.marker);
 // console.log(mike);
-// mike.checkWin();
+draw();
 render();
 // // console.log(mike.mark)
 
