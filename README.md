@@ -15,6 +15,13 @@
    open index.html file
 
 ```
+## Demo
+![Capture](https://user-images.githubusercontent.com/50186903/82951160-af0b5680-9f74-11ea-87f8-75266bcb7d05.PNG)
+
+###
+
+![Capture2](https://user-images.githubusercontent.com/50186903/82951494-453f7c80-9f75-11ea-8bc4-cbcf9584ae10.PNG)
+
 
 ## Authors:
 👤 Roodz
