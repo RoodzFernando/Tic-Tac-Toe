@@ -1,3 +1,6 @@
+const gameboard = document.querySelector("#gameboard");
+const notification = document.querySelector(".notification");
+
 const Gameboard = {
     table: [],
     winComs: [
@@ -14,64 +17,76 @@ const Gameboard = {
 }
 const Player = (name, marker) => {
 
-    checkWin = function() {
-            let xs = [];
+        const changeCurrentPlayer = () => currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0];     
+      
+        const playerMove = function(id) {
+            Gameboard.table.splice(id, 1, this.marker);
+            document.querySelector("#gameboard").innerHTML = ""; 
+        };
+
+        const checkWin = function() {
+            let result = false;
+            let xs = "";
             for (let i = 0; i < Gameboard.table.length; i++) {
                 if (Gameboard.table[i] == this.marker) {
-                    xs.push(i)
+                    xs += i.toString();
                 }
             }
-            xs = xs.join("");
-
+            
             Gameboard.winComs.forEach(word => {
-
                 if (xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])) {
-                    console.log(`${this.name} wins`);
+                   result = true;
                 }
             })
+            return result;
 
-        },
+        };  
 
-        playerMove = function(playerMark) {
-            // document.querySelector("#gameboard")
-            // .addEventListener('click', e => {
-            //     if(typeof e.target.textContent == "string"){
-            //         Gameboard.table.splice(e.target.id, 1, playerMark);
-            //     }
-            // });
-        },
-        
-
-        draw = function() {
+        const draw = function() {
             if (Gameboard.table.every(elem => typeof elem == "string")) {
                 console.log('It\' a draw!');
             }
         }
-    return { name, marker, checkWin }
+
+        return { name, marker, checkWin, playerMove, draw, changeCurrentPlayer}
 }
 Gameboard.table = Array.from(Array(9).keys());
-// console.log(Gameboard.table)
 
+const mike = Player("mike", "X");
+const roodz = Player("roodz", "O");
+const players = [mike, roodz];
 
+let currentPlayer = players[0];
 
-document.querySelector("#gameboard")
-            .addEventListener('click', e => {
-                if(e.target.textContent == " "){
-                    Gameboard.table.splice(e.target.id, 1, "X");
-                    document.querySelector("#gameboard").innerHTML = "";
-                    render();
-                }
-            });
+const initialGameState = () => {
+    Gameboard.table = Array.from(Array(9).keys());
+    render();
+}
+
+ 
+gameboard.addEventListener('click', e => {
+    if(e.target.textContent == " "){
+        currentPlayer.playerMove(e.target.id)
+        render();
+    }
+    
+    if(currentPlayer.checkWin()){
+        notification.textContent = `${currentPlayer.name} wins`;
+        gameboard.innerHTML = "";
+        initialGameState();
+    }
+    
+    currentPlayer.changeCurrentPlayer();
+});
 
 // create the render function
 
 function render() {
-    let gameBoard = document.getElementById("gameboard");
     // loop through the gameboard array
     for (let i = 0; i < Gameboard.table.length; i++) {
         let newDiv = document.createElement("div");
         newDiv.setAttribute("id", i);
-        gameBoard.appendChild(newDiv);
+        gameboard.appendChild(newDiv);
         if (typeof Gameboard.table[i] == "number") {
             newDiv.textContent = " ";
         } else {
@@ -80,21 +95,6 @@ function render() {
     }
 }
 
-// console.log(Gameboard.table.length);
-const mike = Player("mike", "O");
-const roodz = Player("roodz", "X")
+// Game Start Function which sets 
 
-// playerMove(0, roodz.marker);
-// playerMove(0, mike.marker);
-// playerMove(5, mike.marker);
-// playerMove(4, mike.marker);
-// playerMove(6, mike.marker);
-
-
-// playerMove(1, roodz.marker);
-// playerMove(2, roodz.marker);
-// playerMove(3, roodz.marker);
-// playerMove(7, roodz.marker);
-// console.log(mike);
-draw();
 render();

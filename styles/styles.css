@@ -64,3 +64,12 @@ body {
     border-right: none;
     border-bottom: none;
 }
+
+.notification{
+    background:rgb(186, 236, 186);
+    padding:.75rem 1rem;
+    text-align:center;
+    max-width:100px;
+    margin:auto;
+    text-transform: capitalize;
+}
