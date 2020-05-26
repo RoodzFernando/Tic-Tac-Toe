@@ -98,14 +98,13 @@ function gameClick(e) {
 gameboard.addEventListener('click', gameClick);
 restartBtn.addEventListener('click', gameStart);
 
-// create the render function
+
 
 function render() {
-    // loop through the gameboard array
+
     for (let i = 0; i < Gameboard.table.length; i++) {
         let newDiv = document.createElement("div");
         newDiv.setAttribute("id", i);
-        // newDiv.setAttribute("class", i);
         gameboard.appendChild(newDiv);
         if (typeof Gameboard.table[i] == "number") {
             newDiv.textContent = " ";

@@ -33,34 +33,26 @@ body {
 }
 
 #gameboard>div:nth-child(2) {
-    /* border-left: none; */
     border-top: none;
-    /* border-top-left-radius: 14px; */
 }
 
 #gameboard>div:nth-child(3) {
-    /* background: #000; */
     border-top-right-radius: 14px;
     border-right: none;
     border-top: none;
 }
 
 #gameboard>div:nth-child(4) {
-    /* background: #000; */
-    /* border-top-right-radius: 14px; */
     border-left: none;
-    /* border-top: none;  */
 }
 
 #gameboard>div:nth-child(7) {
-    /* background: #000; */
     border-bottom-left-radius: 14px;
     border-left: none;
     border-bottom: none;
 }
 
 #gameboard>div:nth-child(9) {
-    /* background: #000; */
     border-bottom-right-radius: 16px;
     border-right: none;
     border-bottom: none;
@@ -69,7 +61,6 @@ body {
 .notification {
     padding: .75rem 1rem;
     text-align: center;
-    /* max-width: 100px; */
     margin: auto;
     text-transform: uppercase;
     font-weight: bold;
