@@ -85,8 +85,8 @@ function gameClick(e) {
     if (currentPlayer.checkWin()) {
         notification.textContent = `${currentPlayer.name} wins`;
         gameFinish();
-
     }
+
     if (currentPlayer.draw) {
         currentPlayer.draw();
     }
