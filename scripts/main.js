@@ -17,67 +17,79 @@ const Gameboard = {
 }
 const Player = (name, marker) => {
 
-        const changeCurrentPlayer = () => currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0];     
-      
-        const playerMove = function(id) {
-            Gameboard.table.splice(id, 1, this.marker);
-            document.querySelector("#gameboard").innerHTML = ""; 
-        };
+    const changeCurrentPlayer = () => currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0];
 
-        const checkWin = function() {
-            let result = false;
-            let xs = "";
-            for (let i = 0; i < Gameboard.table.length; i++) {
-                if (Gameboard.table[i] == this.marker) {
-                    xs += i.toString();
-                }
-            }
-            
-            Gameboard.winComs.forEach(word => {
-                if (xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])) {
-                   result = true;
-                }
-            })
-            return result;
+    const playerMove = function(id) {
+        Gameboard.table.splice(id, 1, this.marker);
+        document.querySelector("#gameboard").innerHTML = "";
+    };
 
-        };  
-
-        const draw = function() {
-            if (Gameboard.table.every(elem => typeof elem == "string")) {
-                console.log('It\' a draw!');
+    const checkWin = function() {
+        let result = false;
+        let xs = "";
+        for (let i = 0; i < Gameboard.table.length; i++) {
+            if (Gameboard.table[i] == this.marker) {
+                xs += i.toString();
             }
         }
 
-        return { name, marker, checkWin, playerMove, draw, changeCurrentPlayer}
+        Gameboard.winComs.forEach(word => {
+            if (xs.includes(word[0]) && xs.includes(word[1]) && xs.includes(word[2])) {
+                result = true;
+            }
+        })
+        return result;
+
+    };
+
+
+
+    const draw = function() {
+        if (Gameboard.table.every(elem => typeof elem == "string")) {
+            notification.textContent = 'It\' a draw!';
+        }
+    }
+
+    return { name, marker, checkWin, playerMove, draw, changeCurrentPlayer }
 }
 Gameboard.table = Array.from(Array(9).keys());
 
-const mike = Player("mike", "X");
-const roodz = Player("roodz", "O");
-const players = [mike, roodz];
+const player1 = Player(prompt("Player One's name: "), "X");
+const player2 = Player(prompt("Player Two's name: "), "O");
+const players = [];
 
+players.push(player1, player2);
 let currentPlayer = players[0];
+
+function gameFinish() {
+    gameboard.removeEventListener('click', gameClick);
+}
 
 const initialGameState = () => {
     Gameboard.table = Array.from(Array(9).keys());
     render();
 }
 
- 
-gameboard.addEventListener('click', e => {
-    if(e.target.textContent == " "){
+function gameClick(e) {
+    if (e.target.textContent == " ") {
         currentPlayer.playerMove(e.target.id)
         render();
     }
-    
-    if(currentPlayer.checkWin()){
+
+    if (currentPlayer.checkWin()) {
         notification.textContent = `${currentPlayer.name} wins`;
-        gameboard.innerHTML = "";
-        initialGameState();
+        // gameboard.innerHTML = "";
+        // initialGameState();
+        gameFinish();
+
     }
-    
+    if (currentPlayer.draw) {
+        currentPlayer.draw();
+    }
+
     currentPlayer.changeCurrentPlayer();
-});
+}
+gameboard.addEventListener('click', gameClick);
 
 // create the render function
 
@@ -86,6 +98,7 @@ function render() {
     for (let i = 0; i < Gameboard.table.length; i++) {
         let newDiv = document.createElement("div");
         newDiv.setAttribute("id", i);
+        // newDiv.setAttribute("class", i);
         gameboard.appendChild(newDiv);
         if (typeof Gameboard.table[i] == "number") {
             newDiv.textContent = " ";
@@ -95,6 +108,6 @@ function render() {
     }
 }
 
-// Game Start Function which sets 
+// Game Start Function which sets
 
 render();
