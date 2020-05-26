@@ -86,8 +86,15 @@ const roodz = Player("roodz", "X")
 
 playerMove(0, roodz.marker);
 playerMove(0, mike.marker);
+playerMove(5, mike.marker);
 playerMove(4, mike.marker);
-playerMove(8, mike.marker);
+playerMove(6, mike.marker);
+playerMove(8, roodz.marker);
+
+playerMove(1, roodz.marker);
+playerMove(2, roodz.marker);
+playerMove(3, roodz.marker);
+playerMove(7, roodz.marker);
 // console.log(mike);
 // mike.checkWin();
 render();
