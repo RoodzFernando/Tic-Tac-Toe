@@ -14,11 +14,6 @@ const Gameboard = {
 }
 const Player = (name, marker) => {
 
-    // 123, 456, 789, 147, 258, 369 159, 357
-    //nine divs, onclick check if its empty, put the player marker and then check for a win,
-    // if all nine divs arent empty, then a draw
-
-
     checkWin = function() {
             let xs = [];
             for (let i = 0; i < Gameboard.table.length; i++) {
@@ -27,7 +22,6 @@ const Player = (name, marker) => {
                 }
             }
             xs = xs.join("");
-            // console.log(xs)
 
             Gameboard.winComs.forEach(word => {
 
@@ -38,9 +32,15 @@ const Player = (name, marker) => {
 
         },
 
-        playerMove = function(index, playerMark) {
-            Gameboard.table.splice(index, 1, playerMark);
+        playerMove = function(playerMark) {
+            // document.querySelector("#gameboard")
+            // .addEventListener('click', e => {
+            //     if(typeof e.target.textContent == "string"){
+            //         Gameboard.table.splice(e.target.id, 1, playerMark);
+            //     }
+            // });
         },
+        
 
         draw = function() {
             if (Gameboard.table.every(elem => typeof elem == "string")) {
@@ -48,23 +48,20 @@ const Player = (name, marker) => {
             }
         }
     return { name, marker, checkWin }
-    // return {
-    //     // name,
-    //     // marker,
-    //     checkWin()
-    // }
 }
 Gameboard.table = Array.from(Array(9).keys());
 // console.log(Gameboard.table)
 
 
 
-
-
-
-
-
-
+document.querySelector("#gameboard")
+            .addEventListener('click', e => {
+                if(e.target.textContent == " "){
+                    Gameboard.table.splice(e.target.id, 1, "X");
+                    document.querySelector("#gameboard").innerHTML = "";
+                    render();
+                }
+            });
 
 // create the render function
 
@@ -73,6 +70,7 @@ function render() {
     // loop through the gameboard array
     for (let i = 0; i < Gameboard.table.length; i++) {
         let newDiv = document.createElement("div");
+        newDiv.setAttribute("id", i);
         gameBoard.appendChild(newDiv);
         if (typeof Gameboard.table[i] == "number") {
             newDiv.textContent = " ";
@@ -86,20 +84,17 @@ function render() {
 const mike = Player("mike", "O");
 const roodz = Player("roodz", "X")
 
-playerMove(0, roodz.marker);
-playerMove(0, mike.marker);
-playerMove(5, mike.marker);
-playerMove(4, mike.marker);
-playerMove(6, mike.marker);
-playerMove(8, roodz.marker);
+// playerMove(0, roodz.marker);
+// playerMove(0, mike.marker);
+// playerMove(5, mike.marker);
+// playerMove(4, mike.marker);
+// playerMove(6, mike.marker);
 
-playerMove(1, roodz.marker);
-playerMove(2, roodz.marker);
-playerMove(3, roodz.marker);
-playerMove(7, roodz.marker);
+
+// playerMove(1, roodz.marker);
+// playerMove(2, roodz.marker);
+// playerMove(3, roodz.marker);
+// playerMove(7, roodz.marker);
 // console.log(mike);
 draw();
 render();
-// // console.log(mike.mark)
-
-// console.log(Gameboard.table)
