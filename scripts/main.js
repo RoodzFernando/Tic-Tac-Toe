@@ -1,5 +1,6 @@
 const gameboard = document.querySelector("#gameboard");
 const notification = document.querySelector(".notification");
+const restartBtn = document.querySelector(".restart-btn");
 
 const Gameboard = {
     table: [],
@@ -63,11 +64,16 @@ let currentPlayer = players[0];
 
 function gameFinish() {
     gameboard.removeEventListener('click', gameClick);
+    restartBtn.style.display="block";
 }
 
-const initialGameState = () => {
+const gameStart = () => {
     Gameboard.table = Array.from(Array(9).keys());
+    gameboard.innerHTML = "";
+    notification.innerHTML = "";
+    restartBtn.style.display="none";
     render();
+    gameboard.addEventListener('click', gameClick);
 }
 
 function gameClick(e) {
@@ -78,8 +84,6 @@ function gameClick(e) {
 
     if (currentPlayer.checkWin()) {
         notification.textContent = `${currentPlayer.name} wins`;
-        // gameboard.innerHTML = "";
-        // initialGameState();
         gameFinish();
 
     }
@@ -89,7 +93,9 @@ function gameClick(e) {
 
     currentPlayer.changeCurrentPlayer();
 }
+
 gameboard.addEventListener('click', gameClick);
+restartBtn.addEventListener('click', gameStart);
 
 // create the render function
 
@@ -108,6 +114,5 @@ function render() {
     }
 }
 
-// Game Start Function which sets
 
 render();
