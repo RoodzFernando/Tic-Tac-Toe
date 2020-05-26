@@ -47,7 +47,7 @@ const Player = (name, marker) => {
 
     const draw = function() {
         if (Gameboard.table.every(elem => typeof elem == "string")) {
-            notification.textContent = 'It\' a draw!';
+            notification.textContent = 'It\'s a draw!';
         }
     }
 
@@ -64,14 +64,14 @@ let currentPlayer = players[0];
 
 function gameFinish() {
     gameboard.removeEventListener('click', gameClick);
-    restartBtn.style.display="block";
+    restartBtn.style.display = "block";
 }
 
 const gameStart = () => {
     Gameboard.table = Array.from(Array(9).keys());
     gameboard.innerHTML = "";
     notification.innerHTML = "";
-    restartBtn.style.display="none";
+    restartBtn.style.display = "none";
     render();
     gameboard.addEventListener('click', gameClick);
 }
@@ -89,6 +89,7 @@ function gameClick(e) {
 
     if (currentPlayer.draw) {
         currentPlayer.draw();
+        restartBtn.style.display = "block";
     }
 
     currentPlayer.changeCurrentPlayer();
