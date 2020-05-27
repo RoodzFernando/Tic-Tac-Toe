@@ -3,7 +3,7 @@ const notification = document.querySelector('.notification');
 const restartBtn = document.querySelector('.restart-btn');
 
 const Gameboard = {
-    table: [],
+    table: Array.from(Array(9).keys()),
     winComs: [
         '012',
         '345',
@@ -16,15 +16,34 @@ const Gameboard = {
     ],
 
 };
+
 const Player = (name, marker) => {
-    const changeCurrentPlayer = () => (currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0]);
+    const changeCurrentPlayer = (arr) => (currentPlayer === arr[0].name ? currentPlayer = arr[1].name : currentPlayer = arr[0].name);
 
     const playerMove = function(id) {
         Gameboard.table.splice(id, 1, this.marker);
         document.querySelector('#gameboard').innerHTML = '';
     };
 
-    const checkWin = function() {
+    return {
+        name,
+        marker,
+        playerMove,
+        changeCurrentPlayer,
+    };
+};
+
+const game = {
+    gameStart: () => {
+        Gameboard.table = Array.from(Array(9).keys());
+        gameboard.innerHTML = '';
+        notification.innerHTML = '';
+        restartBtn.style.display = 'none';
+        render();
+        gameboard.addEventListener('click', gameClick);
+    },
+
+    checkWin: function() {
         let result = false;
         let xs = '';
         for (let i = 0; i < Gameboard.table.length; i++) {
@@ -39,54 +58,29 @@ const Player = (name, marker) => {
             }
         });
         return result;
-    };
+    },
 
 
-    const draw = function() {
+    draw: function() {
         if (Gameboard.table.every((elem) => typeof elem === 'string')) {
             notification.textContent = 'It\'s a draw!';
         }
-    };
+    },
 
-    return {
-        name,
-        marker,
-        checkWin,
-        playerMove,
-        draw,
-        changeCurrentPlayer,
-    };
-};
-Gameboard.table = Array.from(Array(9).keys());
-
-const player1 = Player(prompt('Player One\'s name: '), 'X');
-const player2 = Player(prompt('Player Two\'s name: '), 'O');
-const players = [];
-
-players.push(player1, player2);
-let currentPlayer = players[0];
-
-function gameFinish() {
-    gameboard.removeEventListener('click', gameClick);
-    restartBtn.style.display = 'block';
+    gameFinish: () => {
+        gameboard.removeEventListener('click', gameClick);
+        restartBtn.style.display = 'block';
+    }
 }
 
-const gameStart = () => {
-    Gameboard.table = Array.from(Array(9).keys());
-    gameboard.innerHTML = '';
-    notification.innerHTML = '';
-    restartBtn.style.display = 'none';
-    render();
-    gameboard.addEventListener('click', gameClick);
-};
-
 function gameClick(e) {
+    console.log(currentPlayer);
     if (e.target.textContent == ' ') {
         currentPlayer.playerMove(e.target.id);
         render();
     }
 
-    if (currentPlayer.checkWin()) {
+    if (currentPlayer.game.checkWin()) {
         notification.textContent = `${currentPlayer.name} wins`;
         gameFinish();
     }
@@ -98,10 +92,6 @@ function gameClick(e) {
 
     currentPlayer.changeCurrentPlayer();
 }
-
-gameboard.addEventListener('click', gameClick);
-restartBtn.addEventListener('click', gameStart);
-
 
 function render() {
     for (let i = 0; i < Gameboard.table.length; i++) {
@@ -117,4 +107,22 @@ function render() {
 }
 
 
-render();
+
+
+const player1 = Player('Mike', 'X');
+const player2 = Player('Roodz', 'O');
+
+// const player1 = Player(prompt('Player One\'s name: '), 'X');
+// const player2 = Player(prompt('Player Two\'s name: '), 'O');
+const players = [];
+
+players.push(player1, player2);
+let currentPlayer = players[0].name;
+console.log(players);
+// console.log(currentPlayer);
+changeCurrentPlayer(players);
+
+
+game.gameStart();
+gameboard.addEventListener('click', gameClick);
+// render();
