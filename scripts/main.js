@@ -19,12 +19,12 @@ const Gameboard = {
 const Player = (name, marker) => {
   const changeCurrentPlayer = () => (currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0]);
 
-  const playerMove = function(id) {
+  const playerMove = function (id) {
     Gameboard.table.splice(id, 1, this.marker);
     document.querySelector('#gameboard').innerHTML = '';
   };
 
-  const checkWin = function() {
+  const checkWin = function () {
     let result = false;
     let xs = '';
     for (let i = 0; i < Gameboard.table.length; i++) {
@@ -42,7 +42,7 @@ const Player = (name, marker) => {
   };
 
 
-  const draw = function() {
+  const draw = function () {
     if (Gameboard.table.every((elem) => typeof elem === 'string')) {
       notification.textContent = 'It\'s a draw!';
     }

@@ -1,8 +1,7 @@
 
-
 module.exports = {
-  'extends': 'stylelint-config-recommended',
-  'rules': {
+  extends: 'stylelint-config-recommended',
+  rules: {
     'at-rule-empty-line-before': ['always', {
       except: [
         'blockless-after-same-name-blockless',
@@ -65,7 +64,7 @@ module.exports = {
     'function-parentheses-newline-inside': 'always-multi-line',
     'function-parentheses-space-inside': 'never-single-line',
     'function-whitespace-after': 'always',
-    'indentation': 4,
+    indentation: 4,
     'length-zero-no-unit': true,
     'max-empty-lines': 1,
     'media-feature-colon-space-after': 'always',
