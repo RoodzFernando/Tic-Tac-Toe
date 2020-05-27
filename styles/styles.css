@@ -2,7 +2,7 @@ body {
     background: #f9c74f;
 }
 
-#gameboard {
+.gameboard {
     border: 8px solid #774936;
     margin: 1rem auto;
     width: 50%;
@@ -14,7 +14,7 @@ body {
     box-sizing: border-box;
 }
 
-#gameboard>div {
+.gameboard>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,33 +26,33 @@ body {
     background: #f7fff7;
 }
 
-#gameboard>div:nth-child(1) {
+.gameboard>div:nth-child(1) {
     border-left: none;
     border-top: none;
     border-top-left-radius: 14px;
 }
 
-#gameboard>div:nth-child(2) {
+.gameboard>div:nth-child(2) {
     border-top: none;
 }
 
-#gameboard>div:nth-child(3) {
+.gameboard>div:nth-child(3) {
     border-top-right-radius: 14px;
     border-right: none;
     border-top: none;
 }
 
-#gameboard>div:nth-child(4) {
+.gameboard>div:nth-child(4) {
     border-left: none;
 }
 
-#gameboard>div:nth-child(7) {
+.gameboard>div:nth-child(7) {
     border-bottom-left-radius: 14px;
     border-left: none;
     border-bottom: none;
 }
 
-#gameboard>div:nth-child(9) {
+.gameboard>div:nth-child(9) {
     border-bottom-right-radius: 16px;
     border-right: none;
     border-bottom: none;
