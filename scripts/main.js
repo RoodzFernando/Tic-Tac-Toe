@@ -52,10 +52,11 @@ const game = {
     gameboard.addEventListener("click", gameClick);
   },
   changeCurrentPlayer: () => {
-    if (currentPlayer === players[0]) {
-      currentPlayer = players[1];
+    const [player1, player2] = players;
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
     } else {
-      currentPlayer = players[0];
+      currentPlayer = player1;
     }
   },
 
