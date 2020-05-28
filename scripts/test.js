@@ -2,6 +2,8 @@ const gameboard = document.querySelector('#gameboard');
 const notification = document.querySelector('.notification');
 const restartBtn = document.querySelector('.restart-btn');
 
+
+
 const Gameboard = {
     table: Array.from(Array(9).keys()),
     winComs: [
@@ -18,7 +20,6 @@ const Gameboard = {
 };
 
 const Player = (name, marker) => {
-    // const changeCurrentPlayer = (arr) => (currentPlayer === arr[0].name ? currentPlayer = arr[1].name : currentPlayer = arr[0].name);
 
 
 
@@ -41,12 +42,21 @@ const game = {
         gameboard.addEventListener('click', gameClick);
         // return { player1, player2 }
     },
+    changeCurrentPlayer: () => {
+        // (currentPlayer === players[0].name ? currentPlayer = players[1].name : currentPlayer = players[0].name)
+        if (currentPlayer === players[0]) {
+            currentPlayer = players[1];
+        } else {
+            currentPlayer = players[0];
+        };
+    },
+
 
     checkWin: function() {
         let result = false;
         let xs = '';
         for (let i = 0; i < Gameboard.table.length; i++) {
-            if (Gameboard.table[i] == "X") {
+            if (Gameboard.table[i] == currentPlayer.marker) {
                 xs += i.toString();
             }
         }
@@ -71,24 +81,26 @@ const game = {
         restartBtn.style.display = 'block';
     },
     playerMove: function(id) {
-        Gameboard.table.splice(id, 1, currentPlayer === players[0].marker ? currentPlayer = players[1].marker : currentPlayer = players[0].marker);
+        Gameboard.table.splice(id, 1, currentPlayer.marker);
         gameboard.innerHTML = '';
     },
 }
 
 function gameClick(e) {
-    console.log(currentPlayer);
+
+    game.changeCurrentPlayer();
+
     if (e.target.textContent == ' ') {
         game.playerMove(e.target.id);
         render();
     }
 
     if (game.checkWin()) {
-        notification.textContent = `${currentPlayer} wins`;
+        notification.textContent = `${currentPlayer.name} wins`;
         game.gameFinish();
     } else if (game.draw()) {
         game.draw();
-        // restartBtn.style.display = 'block';
+        restartBtn.style.display = 'block';
     }
     // restartBtn.style.display = 'block';
 
@@ -117,8 +129,5 @@ restartBtn.addEventListener('click', game.gameStart);
 
 const player1 = Player('Mike', 'X');
 const player2 = Player('Roodz', 'O');
-const players = [];
-players.push(player1, player2);
-currentPlayer = players[0];
-
-console.log(player1.changeCurrentPlayer);
+const players = [player1, player2];
+let currentPlayer = players[0];
