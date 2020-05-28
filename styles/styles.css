@@ -13,7 +13,7 @@ body {
     width: 50%;
 }
 
-.gameboard>div {
+.gameboard > div {
     align-items: center;
     background: #f7fff7;
     border: 1px solid #000;
@@ -25,33 +25,33 @@ body {
     width: 100%;
 }
 
-.gameboard>div:nth-child(1) {
+.gameboard > div:nth-child(1) {
     border-left: none;
     border-top: none;
     border-top-left-radius: 14px;
 }
 
-.gameboard>div:nth-child(2) {
+.gameboard > div:nth-child(2) {
     border-top: none;
 }
 
-.gameboard>div:nth-child(3) {
+.gameboard > div:nth-child(3) {
     border-right: none;
     border-top: none;
     border-top-right-radius: 14px;
 }
 
-.gameboard>div:nth-child(4) {
+.gameboard > div:nth-child(4) {
     border-left: none;
 }
 
-.gameboard>div:nth-child(7) {
+.gameboard > div:nth-child(7) {
     border-bottom: none;
     border-bottom-left-radius: 14px;
     border-left: none;
 }
 
-.gameboard>div:nth-child(9) {
+.gameboard > div:nth-child(9) {
     border-bottom: none;
     border-bottom-right-radius: 16px;
     border-right: none;
@@ -61,7 +61,7 @@ body {
     font-size: 1.1em;
     font-weight: bold;
     margin: auto;
-    padding: .75rem 1rem;
+    padding: 0.75rem 1rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -79,8 +79,8 @@ body {
     cursor: pointer;
     display: none;
     font-size: 1.3rem;
-    padding: .75rem 2rem;
-    transition: all .5s;
+    padding: 0.75rem 2rem;
+    transition: all 0.5s;
 }
 
 .restart-btn:hover {
