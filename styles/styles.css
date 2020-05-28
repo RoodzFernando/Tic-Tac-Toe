@@ -6,14 +6,14 @@ body {
     border: 8px solid #774936;
     border-radius: 15px;
     display: grid;
-    grid-auto-columns: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: auto;
+    grid-template-columns: auto auto auto;
     height: 75vh;
     margin: 1rem auto;
     width: 50%;
 }
 
-.gameboard > div {
+.gameboard>div {
     align-items: center;
     background: #f7fff7;
     border: 1px solid #000;
@@ -25,33 +25,33 @@ body {
     width: 100%;
 }
 
-.gameboard > div:nth-child(1) {
+.gameboard>div:nth-child(1) {
     border-left: none;
     border-top: none;
     border-top-left-radius: 14px;
 }
 
-.gameboard > div:nth-child(2) {
+.gameboard>div:nth-child(2) {
     border-top: none;
 }
 
-.gameboard > div:nth-child(3) {
+.gameboard>div:nth-child(3) {
     border-right: none;
     border-top: none;
     border-top-right-radius: 14px;
 }
 
-.gameboard > div:nth-child(4) {
+.gameboard>div:nth-child(4) {
     border-left: none;
 }
 
-.gameboard > div:nth-child(7) {
+.gameboard>div:nth-child(7) {
     border-bottom: none;
     border-bottom-left-radius: 14px;
     border-left: none;
 }
 
-.gameboard > div:nth-child(9) {
+.gameboard>div:nth-child(9) {
     border-bottom: none;
     border-bottom-right-radius: 16px;
     border-right: none;
