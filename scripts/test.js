@@ -18,36 +18,35 @@ const Gameboard = {
 };
 
 const Player = (name, marker) => {
-    const changeCurrentPlayer = (arr) => (currentPlayer === arr[0].name ? currentPlayer = arr[1].name : currentPlayer = arr[0].name);
+    // const changeCurrentPlayer = (arr) => (currentPlayer === arr[0].name ? currentPlayer = arr[1].name : currentPlayer = arr[0].name);
 
-    const playerMove = function(id) {
-        Gameboard.table.splice(id, 1, this.marker);
-        document.querySelector('#gameboard').innerHTML = '';
-    };
+
 
     return {
         name,
         marker,
-        playerMove,
-        changeCurrentPlayer,
+        // playerMove,
+        // changeCurrentPlayer,
     };
 };
 
 const game = {
     gameStart: () => {
+
         Gameboard.table = Array.from(Array(9).keys());
         gameboard.innerHTML = '';
         notification.innerHTML = '';
         restartBtn.style.display = 'none';
         render();
         gameboard.addEventListener('click', gameClick);
+        // return { player1, player2 }
     },
 
     checkWin: function() {
         let result = false;
         let xs = '';
         for (let i = 0; i < Gameboard.table.length; i++) {
-            if (Gameboard.table[i] == this.marker) {
+            if (Gameboard.table[i] == "X") {
                 xs += i.toString();
             }
         }
@@ -62,7 +61,7 @@ const game = {
 
 
     draw: function() {
-        if (Gameboard.table.every((elem) => typeof elem === 'string')) {
+        if (!this.checkWin() && Gameboard.table.every((elem) => typeof elem === 'string')) {
             notification.textContent = 'It\'s a draw!';
         }
     },
@@ -70,30 +69,34 @@ const game = {
     gameFinish: () => {
         gameboard.removeEventListener('click', gameClick);
         restartBtn.style.display = 'block';
-    }
+    },
+    playerMove: function(id) {
+        Gameboard.table.splice(id, 1, currentPlayer === players[0].marker ? currentPlayer = players[1].marker : currentPlayer = players[0].marker);
+        gameboard.innerHTML = '';
+    },
 }
 
 function gameClick(e) {
     console.log(currentPlayer);
     if (e.target.textContent == ' ') {
-        currentPlayer.playerMove(e.target.id);
+        game.playerMove(e.target.id);
         render();
     }
 
-    if (currentPlayer.game.checkWin()) {
-        notification.textContent = `${currentPlayer.name} wins`;
-        gameFinish();
+    if (game.checkWin()) {
+        notification.textContent = `${currentPlayer} wins`;
+        game.gameFinish();
+    } else if (game.draw()) {
+        game.draw();
+        // restartBtn.style.display = 'block';
     }
+    // restartBtn.style.display = 'block';
 
-    if (currentPlayer.draw) {
-        currentPlayer.draw();
-        restartBtn.style.display = 'block';
-    }
-
-    currentPlayer.changeCurrentPlayer();
+    // changeCurrentPlayer(players);
 }
 
 function render() {
+
     for (let i = 0; i < Gameboard.table.length; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('id', i);
@@ -108,21 +111,14 @@ function render() {
 
 
 
+game.gameStart();
+gameboard.addEventListener('click', gameClick);
+restartBtn.addEventListener('click', game.gameStart);
 
 const player1 = Player('Mike', 'X');
 const player2 = Player('Roodz', 'O');
-
-// const player1 = Player(prompt('Player One\'s name: '), 'X');
-// const player2 = Player(prompt('Player Two\'s name: '), 'O');
 const players = [];
-
 players.push(player1, player2);
-let currentPlayer = players[0].name;
-console.log(players);
-// console.log(currentPlayer);
-changeCurrentPlayer(players);
+currentPlayer = players[0];
 
-
-game.gameStart();
-gameboard.addEventListener('click', gameClick);
-// render();
+console.log(player1.changeCurrentPlayer);
