@@ -4,9 +4,6 @@ body {
 
 .gameboard {
     border: 8px solid #774936;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     border-radius: 15px;
     display: grid;
     grid-auto-columns: auto;
@@ -20,9 +17,6 @@ body {
     align-items: center;
     background: #f7fff7;
     border: 1px solid #000;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     display: flex;
     font-size: 1.5rem;
     font-weight: bold;
