@@ -13,6 +13,8 @@
     "no-shadow": "off",
     "no-param-reassign": "off",
     "eol-last": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "quotes": ["error", "double"],
+    "no-use-before-define": ["error", { "functions": false, "classes": false }]
   }
 }
