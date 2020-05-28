@@ -14,6 +14,7 @@
     "no-param-reassign": "off",
     "eol-last": "off",
     "arrow-parens": "off",
+    "no-alert":"off",
     "quotes": ["error", "double"],
     "no-use-before-define": ["error", {
         "functions": false,
