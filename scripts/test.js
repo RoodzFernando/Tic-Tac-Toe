@@ -20,14 +20,9 @@ const Gameboard = {
 };
 
 const Player = (name, marker) => {
-
-
-
     return {
         name,
         marker,
-        // playerMove,
-        // changeCurrentPlayer,
     };
 };
 
@@ -40,10 +35,8 @@ const game = {
         restartBtn.style.display = 'none';
         render();
         gameboard.addEventListener('click', gameClick);
-        // return { player1, player2 }
     },
     changeCurrentPlayer: () => {
-        // (currentPlayer === players[0].name ? currentPlayer = players[1].name : currentPlayer = players[0].name)
         if (currentPlayer === players[0]) {
             currentPlayer = players[1];
         } else {
@@ -73,6 +66,7 @@ const game = {
     draw: function() {
         if (!this.checkWin() && Gameboard.table.every((elem) => typeof elem === 'string')) {
             notification.textContent = 'It\'s a draw!';
+            restartBtn.style.display = 'block';
         }
     },
 
@@ -100,11 +94,7 @@ function gameClick(e) {
         game.gameFinish();
     } else if (game.draw()) {
         game.draw();
-        restartBtn.style.display = 'block';
     }
-    // restartBtn.style.display = 'block';
-
-    // changeCurrentPlayer(players);
 }
 
 function render() {
