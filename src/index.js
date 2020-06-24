@@ -3,7 +3,7 @@ const gameboard = document.querySelector("#gameboard");
 const notification = document.querySelector(".notification");
 const restartBtn = document.querySelector(".restart-btn");
 
-const Gameboard = {
+export const Gameboard = {
   table: Array.from(Array(9).keys()),
   winComs: ["012", "345", "678", "036", "147", "258", "048", "246"],
 };
