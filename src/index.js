@@ -1,3 +1,4 @@
+import styles from './styles.css';
 const gameboard = document.querySelector("#gameboard");
 const notification = document.querySelector(".notification");
 const restartBtn = document.querySelector(".restart-btn");
