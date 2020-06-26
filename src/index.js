@@ -1,12 +1,13 @@
 import styles from './styles.css';
-const gameboard = document.querySelector("#gameboard");
-const notification = document.querySelector(".notification");
-const restartBtn = document.querySelector(".restart-btn");
+export const gameboard = document.querySelector("#gameboard");
+export const notification = document.querySelector(".notification");
+export const restartBtn = document.querySelector(".restart-btn");
 
-export const Gameboard = {
+const Gameboard = {
   table: Array.from(Array(9).keys()),
   winComs: ["012", "345", "678", "036", "147", "258", "048", "246"],
 };
+module.exports = Gameboard;
 
 const Player = (name, marker) => ({
   name,
@@ -43,12 +44,12 @@ function render() {
   }
 }
 
-const game = {
+export const game = {
   gameStart: () => {
     Gameboard.table = Array.from(Array(9).keys());
-    gameboard.innerHTML = "";
-    notification.innerHTML = "";
-    restartBtn.style.display = "none";
+    // gameboard.innerHTML = "";
+    // notification.innerHTML = "";
+    // restartBtn.style.display = "none";
     render();
     gameboard.addEventListener("click", gameClick);
   },
