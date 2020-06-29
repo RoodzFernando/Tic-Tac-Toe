@@ -91,9 +91,12 @@ const game = {
     if (!this.checkWin() &&
       Gameboard.table.every((elem) => typeof elem === "string")
     ) {
+      
       notification.textContent = "It's a draw!";
       restartBtn.style.display = "block";
+      return true;
     }
+    return false;
   },
 
   gameFinish: () => {
@@ -114,3 +117,5 @@ const player1 = Player(prompt("Player 1 name:"), "X");
 const player2 = Player(prompt("Player 2 name:"), "O");
 const players = [player1, player2];
 let currentPlayer = players[0];
+
+module.exports = {game, Gameboard, Player, gameClick, render};
