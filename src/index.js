@@ -1,11 +1,12 @@
 import styles from './styles.css';
-const gameboard = document.querySelector("#gameboard");
-const notification = document.querySelector(".notification");
-const restartBtn = document.querySelector(".restart-btn");
+
+const gameboard = document.querySelector('#gameboard');
+const notification = document.querySelector('.notification');
+const restartBtn = document.querySelector('.restart-btn');
 
 const Gameboard = {
   table: Array.from(Array(9).keys()),
-  winComs: ["012", "345", "678", "036", "147", "258", "048", "246"],
+  winComs: ['012', '345', '678', '036', '147', '258', '048', '246'],
 };
 
 const Player = (name, marker) => ({
@@ -13,11 +14,10 @@ const Player = (name, marker) => ({
   marker,
 });
 
-
 function gameClick(e) {
   game.changeCurrentPlayer();
 
-  if (e.target.textContent === " ") {
+  if (e.target.textContent === ' ') {
     game.playerMove(e.target.id);
     render();
   }
@@ -32,11 +32,11 @@ function gameClick(e) {
 
 function render() {
   for (let i = 0; i < Gameboard.table.length; i += 1) {
-    const newDiv = document.createElement("div");
-    newDiv.setAttribute("id", i);
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('id', i);
     gameboard.appendChild(newDiv);
-    if (typeof Gameboard.table[i] === "number") {
-      newDiv.textContent = " ";
+    if (typeof Gameboard.table[i] === 'number') {
+      newDiv.textContent = ' ';
     } else {
       newDiv.textContent = Gameboard.table[i];
     }
@@ -46,14 +46,14 @@ function render() {
 const game = {
   gameStart: () => {
     Gameboard.table = Array.from(Array(9).keys());
-    const elemDiv = document.querySelectorAll("#gameboard > div");
-    for (let elem of elemDiv) {
+    const elemDiv = document.querySelectorAll('#gameboard > div');
+    for (const elem of elemDiv) {
       elem.remove();
     }
-    notification.innerHTML = "";
-    restartBtn.style.display = "none";
+    notification.innerHTML = '';
+    restartBtn.style.display = 'none';
     render();
-    gameboard.addEventListener("click", gameClick);
+    gameboard.addEventListener('click', gameClick);
   },
   changeCurrentPlayer: () => {
     const [player1, player2] = players;
@@ -68,7 +68,7 @@ const game = {
 
   checkWin() {
     let result = false;
-    let xs = "";
+    let xs = '';
     for (let i = 0; i < Gameboard.table.length; i += 1) {
       if (Gameboard.table[i] === currentPlayer.marker) {
         xs += i.toString();
@@ -77,9 +77,9 @@ const game = {
 
     Gameboard.winComs.forEach((word) => {
       if (
-        xs.includes(word[0]) &&
-        xs.includes(word[1]) &&
-        xs.includes(word[2])
+        xs.includes(word[0])
+        && xs.includes(word[1])
+        && xs.includes(word[2])
       ) {
         result = true;
       }
@@ -88,34 +88,35 @@ const game = {
   },
 
   draw() {
-    if (!this.checkWin() &&
-      Gameboard.table.every((elem) => typeof elem === "string")
+    if (!this.checkWin()
+      && Gameboard.table.every((elem) => typeof elem === 'string')
     ) {
-      
       notification.textContent = "It's a draw!";
-      restartBtn.style.display = "block";
+      restartBtn.style.display = 'block';
       return true;
     }
     return false;
   },
 
   gameFinish: () => {
-    gameboard.removeEventListener("click", gameClick);
-    restartBtn.style.display = "block";
+    gameboard.removeEventListener('click', gameClick);
+    restartBtn.style.display = 'block';
   },
   playerMove(id) {
     Gameboard.table.splice(id, 1, currentPlayer.marker);
-    gameboard.innerHTML = "";
+    gameboard.innerHTML = '';
   },
 };
 
 game.gameStart();
-gameboard.addEventListener("click", gameClick);
-restartBtn.addEventListener("click", game.gameStart);
+gameboard.addEventListener('click', gameClick);
+restartBtn.addEventListener('click', game.gameStart);
 
-const player1 = Player(prompt("Player 1 name:"), "X");
-const player2 = Player(prompt("Player 2 name:"), "O");
+const player1 = Player(prompt('Player 1 name:'), 'X');
+const player2 = Player(prompt('Player 2 name:'), 'O');
 const players = [player1, player2];
 let currentPlayer = players[0];
 
-module.exports = {game, Gameboard, Player, gameClick, render};
+module.exports = {
+  game, Gameboard, Player, gameClick, render,
+};
