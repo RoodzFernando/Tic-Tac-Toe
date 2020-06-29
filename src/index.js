@@ -1,13 +1,12 @@
 import styles from './styles.css';
-export const gameboard = document.querySelector("#gameboard");
-export const notification = document.querySelector(".notification");
-export const restartBtn = document.querySelector(".restart-btn");
+const gameboard = document.querySelector("#gameboard");
+const notification = document.querySelector(".notification");
+const restartBtn = document.querySelector(".restart-btn");
 
 const Gameboard = {
   table: Array.from(Array(9).keys()),
   winComs: ["012", "345", "678", "036", "147", "258", "048", "246"],
 };
-module.exports = Gameboard;
 
 const Player = (name, marker) => ({
   name,
@@ -44,12 +43,15 @@ function render() {
   }
 }
 
-export const game = {
+const game = {
   gameStart: () => {
     Gameboard.table = Array.from(Array(9).keys());
-    // gameboard.innerHTML = "";
-    // notification.innerHTML = "";
-    // restartBtn.style.display = "none";
+    const elemDiv = document.querySelectorAll("#gameboard > div");
+    for (let elem of elemDiv) {
+      elem.remove();
+    }
+    notification.innerHTML = "";
+    restartBtn.style.display = "none";
     render();
     gameboard.addEventListener("click", gameClick);
   },
@@ -57,8 +59,10 @@ export const game = {
     const [player1, player2] = players;
     if (currentPlayer === player1) {
       currentPlayer = player2;
+      notification.textContent = `${player1.name}'s turn(${player1.marker})`;
     } else {
       currentPlayer = player1;
+      notification.textContent = `${player2.name}'s turn(${player2.marker})`;
     }
   },
 
@@ -73,9 +77,9 @@ export const game = {
 
     Gameboard.winComs.forEach((word) => {
       if (
-        xs.includes(word[0])
-                && xs.includes(word[1])
-                && xs.includes(word[2])
+        xs.includes(word[0]) &&
+        xs.includes(word[1]) &&
+        xs.includes(word[2])
       ) {
         result = true;
       }
@@ -84,8 +88,8 @@ export const game = {
   },
 
   draw() {
-    if (!this.checkWin()
-            && Gameboard.table.every((elem) => typeof elem === "string")
+    if (!this.checkWin() &&
+      Gameboard.table.every((elem) => typeof elem === "string")
     ) {
       notification.textContent = "It's a draw!";
       restartBtn.style.display = "block";
