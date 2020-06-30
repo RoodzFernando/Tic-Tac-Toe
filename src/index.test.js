@@ -1,3 +1,4 @@
+
 window.prompt = jest.fn();
 
 describe('testing availability in the DOM', () => {
@@ -86,24 +87,26 @@ describe('testing availability in the DOM', () => {
   test("Check each players' turn", () => {
       document.body.innerHTML = `
     <p class="notification"></p>
+    <div id="gameboard" class="gameboard"></div>
     <div class="restart-div"><button class="restart-btn" style="display:none;">Restart</button></div>
     `;
     const playerFunc = require('./index');
-    const { game, Player } = playerFunc;
+    const { game, Player, gameClick } = playerFunc;
     const notif = document.getElementsByClassName("notification");
     let player1 = Player("Roodz", "X");
     let player2 = Player("Marvellous", "O");
     const players = [player1, player2];
     let currentPlayer = player1;
-    function changeCurrentPlayer() {
-      const [player1, player2] = players;
-      if (currentPlayer === player1) {
-        currentPlayer = player2;
-      } else {
-        currentPlayer = player1;
-      }
-    }
-    changeCurrentPlayer();
+    let gameboard = document.getElementById("gameboard");
+    game.gameStart();
+    game.changeCurrentPlayer();
     expect(currentPlayer).toEqual(player2);
+  });
+
+  test("check the initial state of the Gameboard on gameStart", () => {
+    const playerFunc = require('./index');
+    const {Gameboard, game} = playerFunc;
+    game.gameStart()
+    expect(Gameboard.table).toEqual([0,1,2,3,4,5,6,7,8]);
   });
 });
