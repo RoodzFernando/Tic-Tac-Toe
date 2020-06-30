@@ -57,13 +57,14 @@ const game = {
   },
   changeCurrentPlayer: () => {
     const [player1, player2] = players;
-    if (currentPlayer === player1) {
+    if (currentPlayer.name === player1.name) {
       currentPlayer = player2;
       notification.textContent = `${player1.name}'s turn(${player1.marker})`;
     } else {
       currentPlayer = player1;
       notification.textContent = `${player2.name}'s turn(${player2.marker})`;
     }
+    return currentPlayer;
   },
 
   checkWin() {

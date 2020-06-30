@@ -85,22 +85,10 @@ describe('testing availability in the DOM', () => {
   });
 
   test("Check each players' turn", () => {
-      document.body.innerHTML = `
-    <p class="notification"></p>
-    <div id="gameboard" class="gameboard"></div>
-    <div class="restart-div"><button class="restart-btn" style="display:none;">Restart</button></div>
-    `;
     const playerFunc = require('./index');
-    const { game, Player, gameClick } = playerFunc;
-    const notif = document.getElementsByClassName("notification");
-    let player1 = Player("Roodz", "X");
-    let player2 = Player("Marvellous", "O");
-    const players = [player1, player2];
-    let currentPlayer = player1;
-    let gameboard = document.getElementById("gameboard");
-    game.gameStart();
-    game.changeCurrentPlayer();
-    expect(currentPlayer).toEqual(player2);
+    const { game } = playerFunc;
+    expect(game.changeCurrentPlayer().marker).toEqual("O");
+  
   });
 
   test("check the initial state of the Gameboard on gameStart", () => {
