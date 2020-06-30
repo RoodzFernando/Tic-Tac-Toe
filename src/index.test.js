@@ -56,4 +56,54 @@ describe('testing availability in the DOM', () => {
     Gameboard.table = ['X', 'X', 'X', 'O', 'O', 'X', 6, 7, 8];
     expect(game.checkWin()).toBe(true);
   });
+
+  test('check when the player1 has won', () => {
+     document.body.innerHTML = `
+    <p class="notification"></p>
+    <div class="restart-div"><button class="restart-btn" style="display:none;">Restart</button></div>
+    `;
+    const playerFunc = require('./index');
+    const { Gameboard, game, Player } = playerFunc;
+    const notif = document.getElementsByClassName("notification");
+    let player1 = Player("Roodz", "X");
+    let player2 = Player("Marvellous", "O");
+    const currentPlayer = player1;
+    for(let i = 0; i < Gameboard.table.length; i++) {
+      if (i % 2 == 0) {
+        Gameboard.table[i] = player1.marker;
+      } else {
+        Gameboard.table[i] = player2.marker;
+      }
+    }
+    notif.textContent = `${currentPlayer.name} wins`;
+    expect(Gameboard.table).toEqual([
+      'X', 'O', 'X',
+      'O', 'X', 'O',
+      'X', 'O', 'X'
+    ]);
+  });
+
+  test("Check each players' turn", () => {
+      document.body.innerHTML = `
+    <p class="notification"></p>
+    <div class="restart-div"><button class="restart-btn" style="display:none;">Restart</button></div>
+    `;
+    const playerFunc = require('./index');
+    const { game, Player } = playerFunc;
+    const notif = document.getElementsByClassName("notification");
+    let player1 = Player("Roodz", "X");
+    let player2 = Player("Marvellous", "O");
+    const players = [player1, player2];
+    let currentPlayer = player1;
+    function changeCurrentPlayer() {
+      const [player1, player2] = players;
+      if (currentPlayer === player1) {
+        currentPlayer = player2;
+      } else {
+        currentPlayer = player1;
+      }
+    }
+    changeCurrentPlayer();
+    expect(currentPlayer).toEqual(player2);
+  });
 });
