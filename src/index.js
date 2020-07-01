@@ -19,20 +19,46 @@ const player2 = Player(prompt('Player 2 name:'), 'O');
 const players = [player1, player2];
 let currentPlayer = players[0];
 
+function gameClick(e) {
+  game.changeCurrentPlayer();
+
+  if (e.target.textContent === ' ') {
+    game.playerMove(e.target.id);
+    render();
+  }
+
+  if (game.checkWin()) {
+    notification.textContent = `${currentPlayer.name} wins`;
+    game.gameFinish();
+  } else if (game.draw()) {
+    game.draw();
+  }
+}
+
+function render() {
+  for (let i = 0; i < Gameboard.table.length; i += 1) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('id', i);
+    gameboard.appendChild(newDiv);
+    if (typeof Gameboard.table[i] === 'number') {
+      newDiv.textContent = ' ';
+    } else {
+      newDiv.textContent = Gameboard.table[i];
+    }
+  }
+}
+
 const game = {
   gameStart: () => {
     Gameboard.table = Array.from(Array(9).keys());
-    const elemDiv = document.querySelectorAll('#gameboard > div');
-    for (const elem of elemDiv) {
-      elem.remove();
-    }
-    notification.innerHTML = '';
-    restartBtn.style.display = 'none';
+    gameboard.innerHTML = "";
+    notification.innerHTML = "";
+    restartBtn.style.display = "none";
     render();
-    gameboard.addEventListener('click', gameClick);
+    gameboard.addEventListener("click", gameClick);
   },
   changeCurrentPlayer: () => {
-    const [player1, player2] = players;
+
     if (currentPlayer.name === player1.name) {
       currentPlayer = player2;
       notification.textContent = `${player1.name}'s turn(${player1.marker})`;
@@ -84,35 +110,6 @@ const game = {
     gameboard.innerHTML = '';
   },
 };
-
-function gameClick(e) {
-  game.changeCurrentPlayer();
-
-  if (e.target.textContent === ' ') {
-    game.playerMove(e.target.id);
-    render();
-  }
-
-  if (game.checkWin()) {
-    notification.textContent = `${currentPlayer.name} wins`;
-    game.gameFinish();
-  } else if (game.draw()) {
-    game.draw();
-  }
-}
-
-function render() {
-  for (let i = 0; i < Gameboard.table.length; i += 1) {
-    const newDiv = document.createElement('div');
-    newDiv.setAttribute('id', i);
-    gameboard.appendChild(newDiv);
-    if (typeof Gameboard.table[i] === 'number') {
-      newDiv.textContent = ' ';
-    } else {
-      newDiv.textContent = Gameboard.table[i];
-    }
-  }
-}
 
 game.gameStart();
 gameboard.addEventListener('click', gameClick);
