@@ -11,4 +11,4 @@ files:
         - 'src/generated/*'
         - 'webroot/bower_components/*'
         - 'dist/*'
-        - 'src/*'
+        - 'src/index.test.js'
