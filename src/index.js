@@ -14,35 +14,6 @@ const Player = (name, marker) => ({
   marker,
 });
 
-function gameClick(e) {
-  game.changeCurrentPlayer();
-
-  if (e.target.textContent === ' ') {
-    game.playerMove(e.target.id);
-    render();
-  }
-
-  if (game.checkWin()) {
-    notification.textContent = `${currentPlayer.name} wins`;
-    game.gameFinish();
-  } else if (game.draw()) {
-    game.draw();
-  }
-}
-
-function render() {
-  for (let i = 0; i < Gameboard.table.length; i += 1) {
-    const newDiv = document.createElement('div');
-    newDiv.setAttribute('id', i);
-    gameboard.appendChild(newDiv);
-    if (typeof Gameboard.table[i] === 'number') {
-      newDiv.textContent = ' ';
-    } else {
-      newDiv.textContent = Gameboard.table[i];
-    }
-  }
-}
-
 const game = {
   gameStart: () => {
     Gameboard.table = Array.from(Array(9).keys());
@@ -108,6 +79,35 @@ const game = {
     gameboard.innerHTML = '';
   },
 };
+
+function gameClick(e) {
+  game.changeCurrentPlayer();
+
+  if (e.target.textContent === ' ') {
+    game.playerMove(e.target.id);
+    render();
+  }
+
+  if (game.checkWin()) {
+    notification.textContent = `${currentPlayer.name} wins`;
+    game.gameFinish();
+  } else if (game.draw()) {
+    game.draw();
+  }
+}
+
+function render() {
+  for (let i = 0; i < Gameboard.table.length; i += 1) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('id', i);
+    gameboard.appendChild(newDiv);
+    if (typeof Gameboard.table[i] === 'number') {
+      newDiv.textContent = ' ';
+    } else {
+      newDiv.textContent = Gameboard.table[i];
+    }
+  }
+}
 
 game.gameStart();
 gameboard.addEventListener('click', gameClick);

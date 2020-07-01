@@ -1,4 +1,3 @@
-
 window.prompt = jest.fn();
 
 describe('testing availability in the DOM', () => {
@@ -59,17 +58,17 @@ describe('testing availability in the DOM', () => {
   });
 
   test('check when the player1 has won', () => {
-     document.body.innerHTML = `
+    document.body.innerHTML = `
     <p class="notification"></p>
     <div class="restart-div"><button class="restart-btn" style="display:none;">Restart</button></div>
     `;
     const playerFunc = require('./index');
     const { Gameboard, game, Player } = playerFunc;
-    const notif = document.getElementsByClassName("notification");
-    let player1 = Player("Roodz", "X");
-    let player2 = Player("Marvellous", "O");
+    const notif = document.getElementsByClassName('notification');
+    const player1 = Player('Roodz', 'X');
+    const player2 = Player('Marvellous', 'O');
     const currentPlayer = player1;
-    for(let i = 0; i < Gameboard.table.length; i++) {
+    for (let i = 0; i < Gameboard.table.length; i++) {
       if (i % 2 == 0) {
         Gameboard.table[i] = player1.marker;
       } else {
@@ -80,34 +79,35 @@ describe('testing availability in the DOM', () => {
     expect(Gameboard.table).toEqual([
       'X', 'O', 'X',
       'O', 'X', 'O',
-      'X', 'O', 'X'
+      'X', 'O', 'X',
     ]);
   });
 
   test("Check each players' turn", () => {
     const playerFunc = require('./index');
     const { game } = playerFunc;
-    expect(game.changeCurrentPlayer().marker).toEqual("O");
-
+    expect(game.changeCurrentPlayer().marker).toEqual('O');
   });
 
-  test("check the initial state of the Gameboard on gameStart", () => {
+  test('check the initial state of the Gameboard on gameStart', () => {
     const playerFunc = require('./index');
-    const {Gameboard, game} = playerFunc;
-    game.gameStart()
-    expect(Gameboard.table).toEqual([0,1,2,3,4,5,6,7,8]);
+    const { Gameboard, game } = playerFunc;
+    game.gameStart();
+    expect(Gameboard.table).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   });
 
-  test("test the value of gameboard changed by gameClick", () => {
+  test('test the value of gameboard changed by gameClick', () => {
     const playerFunc = require('./index');
-    const {Gameboard, game, gameClick, Player} = playerFunc;
-    let e = {
-      target:{
-        textContent: " ",
+    const {
+      Gameboard, game, gameClick, Player,
+    } = playerFunc;
+    const e = {
+      target: {
+        textContent: ' ',
         id: 2,
-      }
-    }
+      },
+    };
     gameClick(e);
-    expect(Gameboard.table[2]).toBe("O");
+    expect(Gameboard.table[2]).toBe('O');
   });
 });
