@@ -88,7 +88,7 @@ describe('testing availability in the DOM', () => {
     const playerFunc = require('./index');
     const { game } = playerFunc;
     expect(game.changeCurrentPlayer().marker).toEqual("O");
-  
+
   });
 
   test("check the initial state of the Gameboard on gameStart", () => {
@@ -96,5 +96,18 @@ describe('testing availability in the DOM', () => {
     const {Gameboard, game} = playerFunc;
     game.gameStart()
     expect(Gameboard.table).toEqual([0,1,2,3,4,5,6,7,8]);
+  });
+
+  test("test the value of gameboard changed by gameClick", () => {
+    const playerFunc = require('./index');
+    const {Gameboard, game, gameClick, Player} = playerFunc;
+    let e = {
+      target:{
+        textContent: " ",
+        id: 2,
+      }
+    }
+    gameClick(e);
+    expect(Gameboard.table[2]).toBe("O");
   });
 });
