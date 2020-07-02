@@ -1,0 +1,41 @@
+{
+  "name": "Tic-Tac-Toe",
+  "version": "1.0.0",
+  "description": "> It is a replica of the Tic Tac Toe game where you can play it directly from your browser.",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+    "test": "jest --watch --verbose false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoodzFernando/Tic-Tac-Toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RoodzFernando/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/RoodzFernando/Tic-Tac-Toe#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.2",
+    "babel-jest": "^26.0.1",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "file-loader": "^6.0.0",
+    "jest": "^26.1.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|jpg|svg)$": "<rootDir>/src/index.js"
+    }
+  }
+}

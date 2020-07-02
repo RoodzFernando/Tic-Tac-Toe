@@ -15,6 +15,8 @@
    open index.html file
 
 ```
+## [Live Version](https://raw.githack.com/RoodzFernando/Tic-Tac-Toe/master/index.html)
+
 ## Demo
 ![Capture](https://user-images.githubusercontent.com/50186903/82951160-af0b5680-9f74-11ea-87f8-75266bcb7d05.PNG)
 
